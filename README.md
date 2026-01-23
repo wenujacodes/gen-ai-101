@@ -1,8 +1,8 @@
-# GitHub Models Starter Pro
+# Gen ai 101 -by olee ai
 
 This repository provides a comprehensive starter kit for leveraging GitHub's GPT-4o and GPT-5 AI models with Node.js. Designed for developers, students, and educators, it showcases practical examples for building intelligent chatbots, handling multi-turn conversations, streaming AI responses, processing images, and integrating advanced reasoning capabilities. With step-by-step setup instructions and real-world coding tasks, this project helps you quickly integrate state-of-the-art AI into your applications. Ideal for those seeking to learn, experiment, or build production-ready solutions using GitHub's AI inference API and the latest GPT-4o and GPT-5 technologies.
 
-[![Follow me on GitHub](https://img.shields.io/github/followers/nisalgunawardhana?label=Follow%20me%20on%20GitHub&style=social)](https://github.com/nisalgunawardhana)
+[![Follow me on GitHub](https://img.shields.io/github/followers/oleeai?label=Follow%20me%20on%20GitHub&style=social)](https://github.com/oleeai)
 
 
 - **Basic Chat Completion**
@@ -26,8 +26,8 @@ This repository provides a comprehensive starter kit for leveraging GitHub's GPT
 
 2. Clone your forked repository and create a new branch named `submission`:
 ```bash
-git clone https://github.com/your-username/Github-models-starter-pro.git
-cd Github-models-starter-pro
+git clone https://github.com/your-username/gen-ai-101.git
+cd gen-ai-101
 git checkout -b submission
 ```
 
@@ -196,7 +196,7 @@ Once you have finished implementing your multi-turn coding assistant chatbot in 
    ![How to Make a PR - Step 3](./Images/pr-image3.png)
 
 7. **Create an Issue**
-  - Go to the [main repository](https://github.com/nisalgunawardhana/Github-models-starter-pro) and create an issue using the `submission` template.
+  - Go to the [main repository](https://github.com/oleeai/gen-ai-101) and create an issue using the `submission` template.
   - Fill in the following details:
     - Full Name
     - University
@@ -232,43 +232,13 @@ Watch this short video for a step-by-step guide on generating your GitHub person
 
 **Keep your token secure and do not share it publicly.**
 
----
-
-## Other Resources
-
-- [Github Models Demo](https://github.com/nisalgunawardhana/Github-Models-Demo)
-- [Introduction to Github Models](https://github.com/nisalgunawardhana/Introduction-to-Github-models)
-
-### Learn About MCP
-
-- [Introduction to MCP](https://github.com/nisalgunawardhana/introduction-to-mcp)
-- [How To Create MCP Server Using .Net](https://github.com/nisalgunawardhana/How-To-Create-MCP-Server)
-
----
-## 🎁 Share and Win Amazing Tech Swag!
-
-Love this project? Share it with your friends and community for a chance to win exclusive tech swag!
-
-- **How to participate:**  
-  Fill out [this form](https://forms.gle/eGxg1bAZgqwq6mPw7) to request your personalized share link. We'll send your unique link to your email within 2–3 business days.
-
-- **Share and Win:**  
-  Once you receive your link, share it with your friends. Ask them to complete the project and include your referral link when they submit.
-
-- **Why share?**  
-  The more friends who use your referral link, the higher your chances to win cool tech goodies—stickers, shirts, and more!
-
-> **Note:** Make sure your email is visible in your GitHub profile or mention it in the form when you request your link.
-
-Stay tuned—winners will be announced in the Discussions tab!
-
 
 ---
 
 ## 💬 Join the Discussion!
 
 Have questions, ideas, or want to share your experience?  
-We welcome you to use [GitHub Discussions](https://github.com/nisalgunawardhana/Github-models-starter-pro/discussions) for:
+We welcome you to use [GitHub Discussions](https://github.com/oleeai/gen-ai-101/discussions) for:
 
 - Asking questions about setup or usage
 - Sharing feedback or suggestions
@@ -281,20 +251,16 @@ Let's build and learn together!
 
 ---
 
-## Connect with Me
+## Connect with us
 
-Follow me on social media for more sessions, tech tips, and giveaways:
+Follow us on social media for more sessions, tech tips, and giveaways:
 
-- [LinkedIn](https://www.linkedin.com/in/nisalgunawardhana/) — Professional updates and networking
-- [Twitter (X)](https://x.com/thenisals) — Insights and announcements
-- [Instagram](https://www.instagram.com/thenisals) — Behind-the-scenes and daily tips
-- [GitHub](https://github.com/nisalgunawardhana) — Repositories and project updates
-- [YouTube](https://www.youtube.com/channel/UCNP5-zR4mN6zkiJ9pVCM-1w) — Video tutorials and sessions
+- [LinkedIn](https://www.linkedin.com/company/oleeaillc) — Professional updates and networking
+- [Twitter (X)](https://x.com/OleeAILLC) — Insights and announcements
+
 
 Feel free to connect and stay updated!
 
 ---
 
-## License
-
-MIT
+Olee.ai 
