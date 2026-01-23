@@ -163,9 +163,7 @@ You are required to build a multi-turn chatbot that provides coding assistance u
 
 **Complete the assessment as described below to earn your certificate and badge!**
 
-Once you have finished implementing your multi-turn coding assistant chatbot in `assessment.js` and submitted your pull request, you will be eligible to receive an official certificate and badge from MLSA.
-
-> ![Sample Certificate and Badge](./Images/certificate-sample.png)
+Once you have finished implementing your multi-turn coding assistant chatbot in `assessment.js` and submitted your pull request, you will be eligible to receive an official certificate and badge from Oleeai.
 
 **How to claim your certificate and badge:**
 1. Complete all steps in the "Assessment Task" section.
