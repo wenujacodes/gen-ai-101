@@ -1,0 +1,115 @@
+name: Submission Roster
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  issues:
+    types: [opened, closed]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  backfill-roster:
+    if: github.event_name != 'issues' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build roster from all submission issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const rosterPath = path.join(process.env.GITHUB_WORKSPACE, 'names.txt');
+
+            // Fetch all issues carrying the submission label (any state)
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'submission',
+              state: 'all',
+              per_page: 100
+            });
+
+            const rows = issues.map(issue => {
+              const nameMatch = issue.body?.match(/###\s*Full Name\s*([\s\S]*?)(?=###|$)/i);
+              const fullName = (nameMatch ? nameMatch[1].trim() : issue.user.login).replace(/,/g, ';');
+              const status = issue.state === 'closed' ? 'completed' : 'open';
+              const date = issue.state === 'closed' ? issue.closed_at : issue.created_at;
+              return {
+                issue: issue.number,
+                line: `${issue.number},${fullName},${issue.user.login},${status},${date}`
+              };
+            }).sort((a, b) => a.issue - b.issue)
+              .map(item => item.line);
+
+            const header = 'issue_number,full_name,github_username,status,date';
+            const content = [header, ...rows].join('\n');
+            fs.writeFileSync(rosterPath, content, 'utf8');
+            core.info(`Roster written with ${rows.length} entries`);
+
+      - name: Commit roster changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: backfill submission roster [skip ci]"
+          file_pattern: names.txt
+
+  update-roster:
+    if: github.event_name == 'issues'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update roster for this issue
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const rosterPath = path.join(process.env.GITHUB_WORKSPACE, 'names.txt');
+            const issue = context.payload.issue;
+
+            const nameMatch = issue.body?.match(/###\s*Full Name\s*([\s\S]*?)(?=###|$)/i);
+            const fullName = (nameMatch ? nameMatch[1].trim() : issue.user.login).replace(/,/g, ';');
+            const status = issue.state === 'closed' ? 'completed' : 'open';
+            const date = issue.state === 'closed' ? issue.closed_at : issue.created_at;
+
+            // Read existing rows
+            const lines = fs.existsSync(rosterPath)
+              ? fs.readFileSync(rosterPath, 'utf8').trim().split(/\r?\n/).filter(Boolean)
+              : [];
+
+            const header = 'issue_number,full_name,github_username,status,date';
+            const entries = new Map();
+
+            // Preserve existing entries (skip header if present)
+            for (const line of lines) {
+              if (line.startsWith('issue_number')) continue;
+              const [issueNum, ...rest] = line.split(',');
+              entries.set(issueNum, line);
+            }
+
+            // Upsert current issue
+            const newLine = `${issue.number},${fullName},${issue.user.login},${status},${date}`;
+            entries.set(String(issue.number), newLine);
+
+            // Rebuild file sorted by issue number
+            const rebuilt = [header, ...[...entries.values()]
+              .sort((a, b) => Number(a.split(',')[0]) - Number(b.split(',')[0]))];
+
+            fs.writeFileSync(rosterPath, rebuilt.join('\n'), 'utf8');
+            core.info(`Roster updated for issue #${issue.number} (${status})`);
+
+      - name: Commit roster changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update submission roster [skip ci]"
+          file_pattern: names.txt
