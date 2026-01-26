@@ -5,7 +5,8 @@ on:
     branches: [main]
   workflow_dispatch:
   issues:
-    types: [opened, closed]
+    # Only run roster update when a submission issue is opened
+    types: [opened]
 
 permissions:
   contents: write
@@ -67,7 +68,8 @@ jobs:
           labels: automation
 
   update-roster:
-    if: github.event_name == 'issues'
+    # Skip roster updates on issue closed events
+    if: github.event_name == 'issues' && github.event.action == 'opened'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
