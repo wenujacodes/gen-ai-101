@@ -54,11 +54,17 @@ jobs:
             fs.writeFileSync(rosterPath, content, 'utf8');
             core.info(`Roster written with ${rows.length} entries`);
 
-      - name: Commit roster changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Open/update roster PR
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit_message: "chore: backfill submission roster [skip ci]"
-          file_pattern: names.txt
+          commit-message: "chore: backfill submission roster"
+          title: "chore: backfill submission roster"
+          branch: automation/roster-backfill
+          base: main
+          add-paths: names.txt
+          body: |
+            Automated backfill of `names.txt` roster.
+          labels: automation
 
   update-roster:
     if: github.event_name == 'issues'
@@ -108,8 +114,14 @@ jobs:
             fs.writeFileSync(rosterPath, rebuilt.join('\n'), 'utf8');
             core.info(`Roster updated for issue #${issue.number} (${status})`);
 
-      - name: Commit roster changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Open/update roster PR
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit_message: "chore: update submission roster [skip ci]"
-          file_pattern: names.txt
+          commit-message: "chore: update submission roster (#${{ github.event.issue.number }})"
+          title: "chore: update submission roster (#${{ github.event.issue.number }})"
+          branch: automation/roster-issue-${{ github.event.issue.number }}
+          base: main
+          add-paths: names.txt
+          body: |
+            Automated roster update for issue #${{ github.event.issue.number }} (state: ${{ github.event.issue.state }}).
+          labels: automation
