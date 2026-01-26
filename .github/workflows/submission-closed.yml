@@ -65,15 +65,16 @@ jobs:
             const issueUrl = context.payload.issue.html_url;
             const repoUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}`;
             const badgeUrl = `${repoUrl}/raw/main/Images/badge.png`;
+            const eventsUrl = `${repoUrl}/tree/main/events`;
             
             const comment = `🎊 **Congratulations, @${context.payload.issue.user.login}!**
             
             This issue has been closed, which means you have **successfully completed this task!** 🎉
             
             ## 🏆 Your Digital Badge
-            
+
             ![Digital Badge](${badgeUrl})
-            
+
             ## 📢 Share Your Achievement
             
             You can showcase your knowledge and share this accomplishment on:
@@ -82,7 +83,10 @@ jobs:
             - 📱 **Other Social Media** - Instagram, Facebook, etc.
             
             **Reference Link:** ${issueUrl}
-            
+
+            ## 📜 Download Your Certificate
+            Visit the [events folder](${eventsUrl}), open your event, and download the certificate image that matches your name.
+
             Feel free to mention that you've completed this assessment and link to this issue as proof of your work!
             
             ---
